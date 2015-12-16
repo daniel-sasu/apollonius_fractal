@@ -1,0 +1,348 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Fractales &mdash; BARA_KHAMMAR_SASU 0 documentation</title>
+    
+    <link rel="stylesheet" href="_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    './',
+        VERSION:     '0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="BARA_KHAMMAR_SASU 0 documentation" href="index.html" />
+    <link rel="next" title="Interface_graphique" href="Interface_graphique.html" />
+    <link rel="prev" title="BARA_KHAMMAR_SASU" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="Interface_graphique.html" title="Interface_graphique"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="BARA_KHAMMAR_SASU"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">BARA_KHAMMAR_SASU 0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="fractales">
+<h1><tt class="docutils literal"><span class="pre">Fractales</span></tt><a class="headerlink" href="#fractales" title="Permalink to this headline">¶</a></h1>
+<p><a class="reference internal" href="index.html"><em>back</em></a></p>
+<span class="target" id="module-Fractales"></span><p><tt class="xref py py-mod docutils literal"><span class="pre">Soddy</span></tt> module</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">author:</th><td class="field-body">BARA Salem_KHAMMAR Ahlam_SASU Daniel</td>
+</tr>
+<tr class="field-even field"><th class="field-name">date:</th><td class="field-body">decembre 2015</td>
+</tr>
+</tbody>
+</table>
+<p>find the coordinates and radius of circles</p>
+<p>in this module a circle is represented by
+a tuple of length 3, the first two elements
+are the coordinates of the center and the third is the radius</p>
+<dl class="function">
+<dt id="Fractales.Distance">
+<tt class="descclassname">Fractales.</tt><tt class="descname">Distance</tt><big>(</big><em>z1</em>, <em>z2</em><big>)</big><a class="reference internal" href="_modules/Fractales.html#Distance"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Fractales.Distance" title="Permalink to this definition">¶</a></dt>
+<dd><p>calculates the distance for two points</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>z1</strong> (<em>complex</em>) &#8211; first point</li>
+<li><strong>z2</strong> (<em>complex</em>) &#8211; second point</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">distance</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first">int</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">UC:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="Fractales.all_circles_soddy">
+<tt class="descclassname">Fractales.</tt><tt class="descname">all_circles_soddy</tt><big>(</big><em>list_triplet</em><big>)</big><a class="reference internal" href="_modules/Fractales.html#all_circles_soddy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Fractales.all_circles_soddy" title="Permalink to this definition">¶</a></dt>
+<dd><p>give all circles of soddy to one circle</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>list_triplet</strong> (<em>list</em>) &#8211; list of all_triplets</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">list of all circles of soddy and list of all new triplets</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">dict</td>
+</tr>
+<tr class="field-even field"><th class="field-name">UC:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="Fractales.all_triplets">
+<tt class="descclassname">Fractales.</tt><tt class="descname">all_triplets</tt><big>(</big><em>couronne</em><big>)</big><a class="reference internal" href="_modules/Fractales.html#all_triplets"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Fractales.all_triplets" title="Permalink to this definition">¶</a></dt>
+<dd><p>give the list of all triplets from a crown</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>centre</strong> (<em>list</em>) &#8211; list of circles which forms crown</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">a list of all triplets</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">list</td>
+</tr>
+<tr class="field-even field"><th class="field-name">UC:</th><td class="field-body">None</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="Fractales.cercle_soddy">
+<tt class="descclassname">Fractales.</tt><tt class="descname">cercle_soddy</tt><big>(</big><em>triplet</em><big>)</big><a class="reference internal" href="_modules/Fractales.html#cercle_soddy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Fractales.cercle_soddy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates the radius of the circle and the center of Soddy , taking in parameter triplet</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>triplet</strong> (<em>list</em>) &#8211; list of three circles (triplets)</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">circle</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">tuple</td>
+</tr>
+<tr class="field-even field"><th class="field-name">UC:</th><td class="field-body"></td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="Fractales.create_cercles">
+<tt class="descclassname">Fractales.</tt><tt class="descname">create_cercles</tt><big>(</big><em>cercle</em>, <em>N</em><big>)</big><a class="reference internal" href="_modules/Fractales.html#create_cercles"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Fractales.create_cercles" title="Permalink to this definition">¶</a></dt>
+<dd><p>give the new crown</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>centre</strong> (<em>tuple</em>) &#8211; circles which given the crown</li>
+<li><strong>N</strong> (<em>int</em>) &#8211; number of circles inside</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">a list of all circles of the crown</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first">list</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">UC:</th><td class="field-body"><p class="first last">N &gt;=2</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="Fractales.draw_empty_circles">
+<tt class="descclassname">Fractales.</tt><tt class="descname">draw_empty_circles</tt><big>(</big><em>list_circles</em>, <em>n_circle</em><big>)</big><a class="reference internal" href="_modules/Fractales.html#draw_empty_circles"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Fractales.draw_empty_circles" title="Permalink to this definition">¶</a></dt>
+<dd><p>draw in empty circle</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>list_circles</strong> &#8211; a list of circles</li>
+<li><strong>n_circle</strong> &#8211; number of circles in the crown</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Type:</th><td class="field-body"><p class="first">list</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body"><p class="first">int</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">new list of circles</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">list</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="Fractales.give_new_triplet">
+<tt class="descclassname">Fractales.</tt><tt class="descname">give_new_triplet</tt><big>(</big><em>c1</em>, <em>c2</em>, <em>c3</em>, <em>c4</em><big>)</big><a class="reference internal" href="_modules/Fractales.html#give_new_triplet"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Fractales.give_new_triplet" title="Permalink to this definition">¶</a></dt>
+<dd><p>Take in parameter three circles and a circle of Soddy and will return a new list of triplet.</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>c1</strong> (<em>triplet</em>) &#8211; circle of Soddy</li>
+<li><strong>c2,c3,c4</strong> (<em>triplet</em>) &#8211; circles tangents</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first">new list of triplets</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">list</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="function">
+<dt id="Fractales.new_draw">
+<tt class="descclassname">Fractales.</tt><tt class="descname">new_draw</tt><big>(</big><em>list_triplet</em><big>)</big><a class="reference internal" href="_modules/Fractales.html#new_draw"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Fractales.new_draw" title="Permalink to this definition">¶</a></dt>
+<dd><p>This function takes a crown and returns all circles to draw inside the circles</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>list_triplet</strong> &#8211; list of triplets</td>
+</tr>
+</tbody>
+</table>
+<p>:type l : list
+:return: list of new circles to draw
+:rtype: list</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="Fractales.recursif_two">
+<tt class="descclassname">Fractales.</tt><tt class="descname">recursif_two</tt><big>(</big><em>liste</em>, <em>n_circle</em>, <em>n=0</em><big>)</big><a class="reference internal" href="_modules/Fractales.html#recursif_two"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#Fractales.recursif_two" title="Permalink to this definition">¶</a></dt>
+<dd><p>draw in all empty circles</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>liste</strong> &#8211; list of circles</li>
+<li><strong>n_circle</strong> &#8211; number of circles</li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Type:</th><td class="field-body"><p class="first">list</p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Type:</th><td class="field-body"><p class="first">int</p>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first last">new list of circles</p>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="index.html">
+              <img class="logo" src="_static/logo_FIL.png" alt="Logo"/>
+            </a></p>
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">BARA_KHAMMAR_SASU</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="Interface_graphique.html"
+                        title="next chapter"><tt class="docutils literal"><span class="pre">Interface_graphique</span></tt></a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/Fractales.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="Interface_graphique.html" title="Interface_graphique"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="BARA_KHAMMAR_SASU"
+             >previous</a> |</li>
+        <li><a href="index.html">BARA_KHAMMAR_SASU 0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2015, Monique et Raymond Calbuth, FIL - IEEA - Univ-lille1.
+      Last updated on 16/12/2015.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,357 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Fractales &mdash; BARA_KHAMMAR_SASU 0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <link rel="top" title="BARA_KHAMMAR_SASU 0 documentation" href="../index.html" />
+    <link rel="up" title="Module code" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">BARA_KHAMMAR_SASU 0 documentation</a> &raquo;</li>
+          <li><a href="index.html" accesskey="U">Module code</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <h1>Source code for Fractales</h1><div class="highlight"><pre>
+<span class="c">#!/usr/bin/python3</span>
+<span class="c"># -*- coding: utf-8 -*-</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">:mod:`Soddy` module</span>
+
+<span class="sd">:author: BARA Salem_KHAMMAR Ahlam_SASU Daniel</span>
+
+<span class="sd">:date: decembre 2015</span>
+<span class="sd">find the coordinates and radius of circles</span>
+
+<span class="sd">in this module a circle is represented by</span>
+<span class="sd">a tuple of length 3, the first two elements</span>
+<span class="sd">are the coordinates of the center and the third is the radius</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="c">#   dans ce module un cercle est représenté par</span>
+<span class="c">#un tuple de longueur 3, les deux premiers éléments</span>
+<span class="c">#sont les coordonnées du centre et le troisiéme c&#39;est le rayon</span>
+
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">import</span> <span class="nn">cmath</span>
+<span class="kn">import</span> <span class="nn">sys</span>
+<span class="kn">import</span> <span class="nn">random</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">setrecursionlimit</span><span class="p">(</span><span class="mi">50000</span><span class="p">)</span>
+
+<span class="c">#   pour éviter des valeurs negatives dans les racines</span>
+<span class="c">#on a mis une translation maximale qui correspond à la taille du canvas</span>
+<span class="c">#en suite pour translater les dessins on fait une soustraction</span>
+<span class="n">T</span><span class="o">=</span><span class="p">(</span><span class="mi">900</span><span class="p">,</span><span class="mi">600</span><span class="p">)</span> <span class="c"># translation </span>
+
+<div class="viewcode-block" id="create_cercles"><a class="viewcode-back" href="../Fractales.html#Fractales.create_cercles">[docs]</a><span class="k">def</span> <span class="nf">create_cercles</span><span class="p">(</span><span class="n">cercle</span><span class="p">,</span><span class="n">N</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    give the new crown </span>
+<span class="sd">    </span>
+<span class="sd">    :param centre: circles which given the crown </span>
+<span class="sd">    :type centre: tuple</span>
+<span class="sd">    :param N: number of circles inside</span>
+<span class="sd">    :type N: int</span>
+<span class="sd">    :return: a list of all circles of the crown</span>
+<span class="sd">    :rtype: list</span>
+<span class="sd">    :UC: N &gt;=2</span>
+<span class="sd">    </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">assert</span><span class="p">(</span><span class="n">N</span><span class="o">&gt;</span><span class="mi">2</span><span class="p">),</span><span class="s">&quot;number of circles can&#39;t be less then 2&quot;</span>
+    <span class="n">R</span><span class="o">=</span><span class="n">cercle</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+    <span class="c"># calcule du rayon du petit cercle au milieu</span>
+    <span class="n">r</span><span class="o">=</span><span class="n">R</span><span class="o">*</span><span class="p">((</span><span class="mi">1</span><span class="o">-</span><span class="n">sin</span><span class="p">(</span><span class="n">pi</span><span class="o">/</span><span class="n">N</span><span class="p">))</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">sin</span><span class="p">(</span><span class="n">pi</span><span class="o">/</span><span class="n">N</span><span class="p">)))</span>
+    <span class="c"># les rayons des autres cercles tengents</span>
+    <span class="n">r1</span><span class="o">=</span><span class="n">R</span><span class="o">*</span><span class="p">((</span><span class="n">sin</span><span class="p">(</span><span class="n">pi</span><span class="o">/</span><span class="n">N</span><span class="p">))</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">sin</span><span class="p">(</span><span class="n">pi</span><span class="o">/</span><span class="n">N</span><span class="p">)))</span>
+    <span class="c"># commencer à dessiner</span>
+    <span class="c"># recupérer tous les cercles tengents</span>
+    <span class="n">list_cercles</span><span class="o">=</span><span class="p">[]</span>
+    <span class="c"># le grand cercle</span>
+    <span class="n">list_cercles</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">cercle</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="n">T</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">cercle</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">T</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">R</span><span class="p">))</span>
+    <span class="c"># le cercle du milieu</span>
+    <span class="n">list_cercles</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">cercle</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="n">T</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">cercle</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">T</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">r</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">N</span><span class="p">):</span>
+        <span class="n">new_centre</span><span class="o">=</span> <span class="p">((</span><span class="n">r</span> <span class="o">+</span> <span class="n">r1</span><span class="p">)</span> <span class="o">*</span> <span class="n">cos</span><span class="p">((</span><span class="mi">2</span><span class="o">*</span><span class="n">i</span><span class="o">*</span><span class="n">pi</span><span class="p">)</span><span class="o">/</span><span class="n">N</span><span class="p">),(</span><span class="n">r</span> <span class="o">+</span> <span class="n">r1</span><span class="p">)</span> <span class="o">*</span> <span class="n">sin</span><span class="p">((</span><span class="mi">2</span><span class="o">*</span><span class="n">i</span><span class="o">*</span><span class="n">pi</span><span class="p">)</span><span class="o">/</span><span class="n">N</span><span class="p">))</span>
+        <span class="c"># les autres cercles</span>
+        <span class="n">list_cercles</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">new_centre</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="n">T</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">new_centre</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">T</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">r1</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">list_cercles</span>
+
+
+<span class="c">#########################################################################</span>
+<span class="c">###                 creation de la couronne                           ###</span>
+<span class="c">#########################################################################</span>
+
+</div>
+<div class="viewcode-block" id="all_triplets"><a class="viewcode-back" href="../Fractales.html#Fractales.all_triplets">[docs]</a><span class="k">def</span> <span class="nf">all_triplets</span><span class="p">(</span><span class="n">couronne</span><span class="p">):</span>
+    
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    give the list of all triplets from a crown</span>
+<span class="sd">    </span>
+<span class="sd">    :param centre: list of circles which forms crown</span>
+<span class="sd">    :type centre: list</span>
+<span class="sd">    :return: a list of all triplets</span>
+<span class="sd">    :rtype: list</span>
+<span class="sd">    :UC: None</span>
+<span class="sd">    </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">triplets</span><span class="o">=</span><span class="p">[]</span>
+    <span class="n">list_ten</span><span class="o">=</span><span class="n">couronne</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">list_ten</span><span class="p">)</span><span class="o">-</span><span class="mi">2</span><span class="p">):</span>
+        <span class="n">triplets</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">list_ten</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">list_ten</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span><span class="n">list_ten</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">2</span><span class="p">]])</span>
+        <span class="n">triplets</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">couronne</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">list_ten</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">],</span><span class="n">list_ten</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">2</span><span class="p">]])</span>
+    <span class="c"># n&#39;oublions pas le dernier cercle avec le premier</span>
+    <span class="n">triplets</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">list_ten</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">list_ten</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span><span class="n">list_ten</span><span class="p">[</span><span class="mi">1</span><span class="p">]])</span>
+    <span class="n">triplets</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">couronne</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">list_ten</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span><span class="n">list_ten</span><span class="p">[</span><span class="mi">1</span><span class="p">]])</span>
+    <span class="k">return</span> <span class="n">triplets</span>
+
+<span class="c">########################################################################</span>
+<span class="c">####                  le calcule mathematique                       ####</span>
+<span class="c">########################################################################</span>
+</div>
+<div class="viewcode-block" id="Distance"><a class="viewcode-back" href="../Fractales.html#Fractales.Distance">[docs]</a><span class="k">def</span> <span class="nf">Distance</span><span class="p">(</span><span class="n">z1</span><span class="p">,</span><span class="n">z2</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    calculates the distance for two points</span>
+
+<span class="sd">    :param z1: first point  </span>
+<span class="sd">    :type z1: complex</span>
+<span class="sd">    :param z2: second point  </span>
+<span class="sd">    :type z2: complex</span>
+<span class="sd">    :return:  distance</span>
+<span class="sd">    :rtype: int</span>
+<span class="sd">    :UC:</span>
+<span class="sd">    &quot;&quot;&quot;</span>	
+    <span class="n">x1</span><span class="o">=</span><span class="n">z1</span><span class="o">.</span><span class="n">real</span>
+    <span class="n">x2</span><span class="o">=</span><span class="n">z2</span><span class="o">.</span><span class="n">real</span>
+    <span class="n">y1</span><span class="o">=</span><span class="n">z1</span><span class="o">.</span><span class="n">imag</span>
+    <span class="n">y2</span><span class="o">=</span><span class="n">z2</span><span class="o">.</span><span class="n">imag</span>
+    <span class="k">return</span> <span class="n">sqrt</span><span class="p">((</span><span class="n">y2</span><span class="o">-</span><span class="n">y1</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="o">+</span><span class="p">(</span><span class="n">x2</span><span class="o">-</span><span class="n">x1</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+</div>
+<div class="viewcode-block" id="cercle_soddy"><a class="viewcode-back" href="../Fractales.html#Fractales.cercle_soddy">[docs]</a><span class="k">def</span> <span class="nf">cercle_soddy</span><span class="p">(</span><span class="n">triplet</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Calculates the radius of the circle and the center of Soddy , taking in parameter triplet</span>
+
+<span class="sd">    :param triplet: list of three circles (triplets)</span>
+<span class="sd">    :type triplet: list</span>
+<span class="sd">    :return: circle</span>
+<span class="sd">    :rtype: tuple</span>
+<span class="sd">    :UC:</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="c"># on récupére les centres des trois cercles</span>
+    <span class="c"># on calcule le centre du cercle de soddy sous forme d&#39;un complexe z4</span>
+    <span class="n">k1</span><span class="o">=</span><span class="mi">1</span><span class="o">/</span><span class="n">triplet</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span>
+    <span class="n">k2</span><span class="o">=</span><span class="mi">1</span><span class="o">/</span><span class="n">triplet</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> 
+    <span class="n">k3</span><span class="o">=</span><span class="mi">1</span><span class="o">/</span><span class="n">triplet</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span> 
+    <span class="n">k4</span><span class="o">=</span><span class="p">(</span><span class="n">k1</span><span class="o">+</span><span class="n">k2</span><span class="o">+</span><span class="n">k3</span><span class="p">)</span><span class="o">+</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">sqrt</span><span class="p">((</span><span class="n">k1</span><span class="o">*</span><span class="n">k2</span><span class="p">)</span><span class="o">+</span><span class="p">(</span><span class="n">k1</span><span class="o">*</span><span class="n">k3</span><span class="p">)</span><span class="o">+</span><span class="p">(</span><span class="n">k2</span><span class="o">*</span><span class="n">k3</span><span class="p">)))</span>
+    <span class="n">z1</span><span class="o">=</span><span class="nb">complex</span><span class="p">(</span><span class="n">triplet</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">triplet</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">z2</span><span class="o">=</span><span class="nb">complex</span><span class="p">(</span><span class="n">triplet</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">triplet</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">z3</span><span class="o">=</span><span class="nb">complex</span><span class="p">(</span><span class="n">triplet</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">triplet</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
+    <span class="n">z4</span><span class="o">=</span><span class="p">(</span><span class="n">z1</span><span class="o">*</span><span class="n">k1</span><span class="o">+</span><span class="n">z2</span><span class="o">*</span><span class="n">k2</span><span class="o">+</span><span class="n">z3</span><span class="o">*</span><span class="n">k3</span><span class="o">+</span><span class="mi">2</span><span class="o">*</span><span class="n">cmath</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">k1</span><span class="o">*</span><span class="n">k2</span><span class="o">*</span><span class="n">z1</span><span class="o">*</span><span class="n">z2</span><span class="o">+</span><span class="n">k2</span><span class="o">*</span><span class="n">k3</span><span class="o">*</span><span class="n">z2</span><span class="o">*</span><span class="n">z3</span><span class="o">+</span><span class="n">k1</span><span class="o">*</span><span class="n">k3</span><span class="o">*</span><span class="n">z1</span><span class="o">*</span><span class="n">z3</span><span class="p">))</span><span class="o">/</span><span class="n">k4</span>
+    <span class="c"># la condition verifie si la distance entre deux cercles est egale à la somme des deux rayons</span>
+    <span class="k">if</span>  <span class="nb">int</span><span class="p">(</span><span class="n">Distance</span><span class="p">(</span><span class="n">z4</span><span class="p">,</span><span class="n">z1</span><span class="p">))</span><span class="o">==</span><span class="nb">int</span><span class="p">((</span><span class="n">triplet</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="o">/</span><span class="n">k4</span><span class="p">))</span> <span class="ow">and</span> <span class="nb">int</span><span class="p">(</span><span class="n">Distance</span><span class="p">(</span><span class="n">z4</span><span class="p">,</span><span class="n">z2</span><span class="p">))</span><span class="o">==</span><span class="nb">int</span><span class="p">((</span><span class="n">triplet</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="o">/</span><span class="n">k4</span><span class="p">))</span> <span class="ow">and</span> <span class="nb">int</span><span class="p">(</span><span class="n">Distance</span><span class="p">(</span><span class="n">z4</span><span class="p">,</span><span class="n">z3</span><span class="p">))</span><span class="o">==</span><span class="nb">int</span><span class="p">((</span><span class="n">triplet</span><span class="p">[</span><span class="mi">2</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="o">/</span><span class="n">k4</span><span class="p">)):</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">z4</span><span class="o">.</span><span class="n">real</span><span class="p">,</span><span class="n">z4</span><span class="o">.</span><span class="n">imag</span><span class="p">,</span><span class="mi">1</span><span class="o">/</span><span class="n">k4</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">k1</span><span class="o">=-</span><span class="mi">1</span><span class="o">/</span><span class="n">triplet</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span>   <span class="c"># la courbure du cercle qui contient les autres est negative</span>
+        <span class="n">k4</span><span class="o">=</span><span class="p">(</span><span class="n">k1</span><span class="o">+</span><span class="n">k2</span><span class="o">+</span><span class="n">k3</span><span class="p">)</span><span class="o">+</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">sqrt</span><span class="p">((</span><span class="n">k1</span><span class="o">*</span><span class="n">k2</span><span class="p">)</span><span class="o">+</span><span class="p">(</span><span class="n">k1</span><span class="o">*</span><span class="n">k3</span><span class="p">)</span><span class="o">+</span><span class="p">(</span><span class="n">k2</span><span class="o">*</span><span class="n">k3</span><span class="p">)))</span>
+        <span class="n">z4</span><span class="o">=</span><span class="p">(</span><span class="n">z1</span><span class="o">*</span><span class="n">k1</span><span class="o">+</span><span class="n">z2</span><span class="o">*</span><span class="n">k2</span><span class="o">+</span><span class="n">z3</span><span class="o">*</span><span class="n">k3</span><span class="o">+</span><span class="mi">2</span><span class="o">*</span><span class="n">cmath</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">k1</span><span class="o">*</span><span class="n">k2</span><span class="o">*</span><span class="n">z1</span><span class="o">*</span><span class="n">z2</span><span class="o">+</span><span class="n">k2</span><span class="o">*</span><span class="n">k3</span><span class="o">*</span><span class="n">z2</span><span class="o">*</span><span class="n">z3</span><span class="o">+</span><span class="n">k1</span><span class="o">*</span><span class="n">k3</span><span class="o">*</span><span class="n">z1</span><span class="o">*</span><span class="n">z3</span><span class="p">))</span><span class="o">/</span><span class="n">k4</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">z4</span><span class="o">.</span><span class="n">real</span><span class="p">,</span><span class="n">z4</span><span class="o">.</span><span class="n">imag</span><span class="p">,</span><span class="mi">1</span><span class="o">/</span><span class="n">k4</span><span class="p">)</span>    
+        
+
+<span class="c">######################################################################################</span>
+<span class="c">###             chercher tous les cercles de soddy de la couronne                 ####</span>
+<span class="c">######################################################################################</span></div>
+<div class="viewcode-block" id="give_new_triplet"><a class="viewcode-back" href="../Fractales.html#Fractales.give_new_triplet">[docs]</a><span class="k">def</span> <span class="nf">give_new_triplet</span><span class="p">(</span><span class="n">c1</span><span class="p">,</span><span class="n">c2</span><span class="p">,</span><span class="n">c3</span><span class="p">,</span><span class="n">c4</span><span class="p">):</span>
+    
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Take in parameter three circles and a circle of Soddy and will return a new list of triplet.</span>
+<span class="sd">    </span>
+<span class="sd">    :param c1: circle of Soddy</span>
+<span class="sd">    :type c1: triplet</span>
+<span class="sd">    :param c2,c3,c4: circles tangents</span>
+<span class="sd">    :type c2,c3,c4: triplet</span>
+<span class="sd">    :return: new list of triplets</span>
+<span class="sd">    :rtype: list</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">new</span><span class="o">=</span><span class="p">[]</span>
+    <span class="n">new</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">c1</span><span class="p">,</span><span class="n">c2</span><span class="p">,</span><span class="n">c3</span><span class="p">])</span>
+    <span class="n">new</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">c1</span><span class="p">,</span><span class="n">c2</span><span class="p">,</span><span class="n">c4</span><span class="p">])</span>
+    <span class="n">new</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">c2</span><span class="p">,</span><span class="n">c3</span><span class="p">,</span><span class="n">c4</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">new</span>
+    </div>
+<div class="viewcode-block" id="all_circles_soddy"><a class="viewcode-back" href="../Fractales.html#Fractales.all_circles_soddy">[docs]</a><span class="k">def</span> <span class="nf">all_circles_soddy</span><span class="p">(</span><span class="n">list_triplet</span><span class="p">):</span>
+    <span class="c"># cette fontion prend une liste de triplets et donne le cercle de soddy de chaque triplet</span>
+    <span class="c"># et la nouvelle liste de triplet</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    give all circles of soddy to one circle</span>
+
+<span class="sd">    :param list_triplet: list of all_triplets </span>
+<span class="sd">    :type list_triplet: list</span>
+<span class="sd">    :return: list of all circles of soddy and list of all new triplets</span>
+<span class="sd">    :rtype: dict</span>
+<span class="sd">    :UC:</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="n">all_soddy</span><span class="o">=</span><span class="p">[]</span>        <span class="c"># tous les nouveaux cercles de soddy</span>
+    <span class="n">get_tri</span><span class="o">=</span><span class="p">[]</span>          <span class="c">#les nouveaux triplets</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">list_triplet</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">cercle_soddy</span><span class="p">(</span><span class="n">i</span><span class="p">)[</span><span class="mi">2</span><span class="p">]</span><span class="o">&gt;=</span><span class="mi">1</span><span class="p">:</span>       <span class="c"># on rajoute que les cercles de rayon plus grand que 1</span>
+            <span class="n">all_soddy</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cercle_soddy</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
+            <span class="n">get_tri</span><span class="o">+=</span><span class="n">give_new_triplet</span><span class="p">(</span><span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">cercle_soddy</span><span class="p">(</span><span class="n">i</span><span class="p">),</span><span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">i</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+    <span class="k">return</span> <span class="p">{</span><span class="s">&#39;soddy&#39;</span><span class="p">:</span><span class="n">all_soddy</span><span class="p">,</span><span class="s">&#39;new_triplets&#39;</span><span class="p">:</span><span class="n">get_tri</span><span class="p">}</span>
+    
+</div>
+<div class="viewcode-block" id="new_draw"><a class="viewcode-back" href="../Fractales.html#Fractales.new_draw">[docs]</a><span class="k">def</span> <span class="nf">new_draw</span><span class="p">(</span><span class="n">list_triplet</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    This function takes a crown and returns all circles to draw inside the circles </span>
+
+<span class="sd">    :param list_triplet:  list of triplets</span>
+<span class="sd">    :type l : list</span>
+<span class="sd">    :return: list of new circles to draw</span>
+<span class="sd">    :rtype: list</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">l</span> <span class="o">=</span> <span class="n">all_circles_soddy</span><span class="p">(</span><span class="n">list_triplet</span><span class="p">)[</span><span class="s">&#39;soddy&#39;</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">l</span><span class="o">==</span><span class="p">[]:</span>
+        <span class="k">return</span> <span class="p">[]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">l</span><span class="o">+</span><span class="n">new_draw</span><span class="p">(</span><span class="n">all_circles_soddy</span><span class="p">(</span><span class="n">list_triplet</span><span class="p">)[</span><span class="s">&#39;new_triplets&#39;</span><span class="p">])</span>
+
+    
+<span class="c">#################################################################################</span>
+<span class="c">###                 dessiner dans les cercles vides                         #####</span>
+<span class="c">#################################################################################</span>
+</div>
+<div class="viewcode-block" id="draw_empty_circles"><a class="viewcode-back" href="../Fractales.html#Fractales.draw_empty_circles">[docs]</a><span class="k">def</span> <span class="nf">draw_empty_circles</span><span class="p">(</span><span class="n">list_circles</span><span class="p">,</span><span class="n">n_circle</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    draw in empty circle</span>
+
+<span class="sd">    :param list_circles: a list of circles</span>
+<span class="sd">    :type: list</span>
+<span class="sd">    :param n_circle: number of circles in the crown</span>
+<span class="sd">    :type: int</span>
+<span class="sd">    :return: new list of circles</span>
+<span class="sd">    :rtype: list</span>
+<span class="sd">    &quot;&quot;&quot;</span>	
+    <span class="n">k</span><span class="o">=</span><span class="p">[]</span>
+    <span class="k">for</span> <span class="n">cer</span> <span class="ow">in</span> <span class="n">list_circles</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">cer</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span><span class="o">&gt;=</span><span class="mi">2</span><span class="p">:</span>
+            <span class="c">#n&#39;oublions pas de mettre à jour la translation</span>
+            <span class="n">inter_x</span><span class="o">=</span><span class="n">cer</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="n">T</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">inter_y</span><span class="o">=</span><span class="n">cer</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">T</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">create_new</span><span class="o">=</span><span class="n">create_cercles</span><span class="p">(</span><span class="n">cer</span><span class="p">,</span><span class="n">n_circle</span><span class="p">)</span>
+            <span class="n">create_new</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="o">+</span><span class="n">T</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="mi">0</span><span class="o">+</span><span class="n">T</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">create_new</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">2</span><span class="p">])</span>
+            <span class="n">create_new</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="o">+</span><span class="n">T</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="mi">0</span><span class="o">+</span><span class="n">T</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">create_new</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">2</span><span class="p">])</span>
+            <span class="n">h</span><span class="o">=</span><span class="n">all_triplets</span><span class="p">(</span><span class="n">create_new</span><span class="p">)</span>
+            <span class="n">s</span><span class="o">=</span><span class="n">new_draw</span><span class="p">(</span><span class="n">h</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">create_new</span><span class="p">[</span><span class="mi">1</span><span class="p">:]:</span>
+                <span class="n">k</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="n">inter_x</span><span class="p">,</span><span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">inter_y</span><span class="p">,</span><span class="n">i</span><span class="p">[</span><span class="mi">2</span><span class="p">]))</span>
+            <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">s</span><span class="p">:</span>
+                <span class="n">k</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">v</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="n">inter_x</span><span class="p">,</span><span class="n">v</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">inter_y</span><span class="p">,</span><span class="n">v</span><span class="p">[</span><span class="mi">2</span><span class="p">]))</span>
+    <span class="k">return</span> <span class="n">k</span></div>
+<div class="viewcode-block" id="recursif_two"><a class="viewcode-back" href="../Fractales.html#Fractales.recursif_two">[docs]</a><span class="k">def</span> <span class="nf">recursif_two</span><span class="p">(</span><span class="n">liste</span><span class="p">,</span><span class="n">n_circle</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    draw in all empty circles</span>
+
+<span class="sd">    :param liste: list of circles</span>
+<span class="sd">    :type: list</span>
+<span class="sd">    :param n_circle: number of circles</span>
+<span class="sd">    :type: int</span>
+<span class="sd">    :return: new list of circles </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">draw</span><span class="o">=</span><span class="n">draw_empty_circles</span><span class="p">(</span><span class="n">liste</span><span class="p">,</span><span class="n">n_circle</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">n</span><span class="o">&gt;=</span><span class="mi">3</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">draw</span><span class="o">+</span><span class="n">recursif_two</span><span class="p">(</span><span class="n">draw</span><span class="p">,</span><span class="n">n_circle</span><span class="p">,</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+    </div>
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="k">pass</span>         
+    
+    
+    
+    
+    
+    
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <p class="logo"><a href="../index.html">
+              <img class="logo" src="../_static/logo_FIL.png" alt="Logo"/>
+            </a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li><a href="../index.html">BARA_KHAMMAR_SASU 0 documentation</a> &raquo;</li>
+          <li><a href="index.html" >Module code</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2015, Monique et Raymond Calbuth, FIL - IEEA - Univ-lille1.
+      Last updated on 16/12/2015.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.3.
+    </div>
+  </body>
+</html>
