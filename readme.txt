@@ -45,10 +45,9 @@ et de contrôler la génération de ces figures pour en explorer toutes les poss
      5-remplir chaque cercle vide créé à l’étape précédente par une nouvelle baderne,la deuxième récursivité.
 
 ###################################################################################################
-###      		Les difficultés renconté  						###
+###      		Les difficultés rencontées  						###
 ###################################################################################################
 --> calculer le cercles de soddy,savoir si les cercles sont tengents interieurement ou exterieurement.
---> Trouver la bonne 
 --> Trouver le point d'arret du dessin recusrsif.
 
 
